@@ -1,5 +1,6 @@
 package com.androiddevs.mvvmnewsapp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,9 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
             tvTitle.text = article.title
             tvPublishedAt.text = article.publishedAt
             setOnClickListener{
-                onItemClickListener?.let { it(article) }
+                Log.d("TAG", "onBindViewHolder: $position")
+                Log.d("TAG", "onBindViewHolder: $article")
+                onItemClickListener?.let { it1 -> it1(differ.currentList[position]) }
             }
         }
     }
@@ -60,6 +63,5 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     fun setOnItemClickListener(listener : (Article)-> Unit){
         onItemClickListener = listener
     }
-
-
 }
+

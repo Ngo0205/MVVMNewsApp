@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/DU LIEU/Java/kotlin/MVVMNewsApp2/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/DU LIEU/Java/kotlin/MVVMNewsApp2/app/src/main/res/layout/activity_news.xml" value="0.14" />
         <entry key="..\:/DU LIEU/Java/kotlin/MVVMNewsApp2/app/src/main/res/layout/fragment_article.xml" value="0.1" />
         <entry key="..\:/DU LIEU/Java/kotlin/MVVMNewsApp2/app/src/main/res/layout/fragment_breaking_news.xml" value="0.153125" />
+        <entry key="..\:/DU LIEU/Java/kotlin/MVVMNewsApp2/app/src/main/res/layout/fragment_saved_news.xml" value="0.13541666666666666" />
         <entry key="..\:/DU LIEU/Java/kotlin/MVVMNewsApp2/app/src/main/res/layout/item_article_preview.xml" value="0.33" />
         <entry key="..\:/DU LIEU/Java/kotlin/MVVMNewsApp2/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
       </map>

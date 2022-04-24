@@ -5,12 +5,17 @@ import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.adapter.NewsAdapter
+import com.androiddevs.mvvmnewsapp.db.ArticleDatabase
+import com.androiddevs.mvvmnewsapp.repository.NewsRepository
 import com.androiddevs.mvvmnewsapp.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
+import com.androiddevs.mvvmnewsapp.ui.NewsViewModelProviderFactory
 import com.androiddevs.mvvmnewsapp.ui.util.Constans.Companion.SEARCH_NEWS_TIME_DELAY
 import com.androiddevs.mvvmnewsapp.ui.util.Resource
 import kotlinx.android.synthetic.main.fragment_breaking_news.*
@@ -23,14 +28,28 @@ import kotlinx.coroutines.launch
 
 class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
 
-    lateinit var viewModel: NewsViewModel
+    val viewModel: NewsViewModel by activityViewModels{
+        NewsViewModelProviderFactory(NewsRepository(ArticleDatabase(requireContext())) )
+    }
     lateinit var newsAdapter: NewsAdapter
     val TAG ="SearchNewsTag"
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as NewsActivity).viewModel
+
         setupRecycleView()
+
+        newsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply{
+                putSerializable("article",it)
+            }
+            findNavController().navigate(
+                R.id.action_searchNewsFragment_to_articleFragment,
+                bundle
+            )
+        }
 
         var job: Job? = null
         etSearch.addTextChangedListener { editTable ->
@@ -67,8 +86,6 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
             }
         })
     }
-
-
 
     private fun hideProgessBar(){
         paginationProgressBar.visibility = View.INVISIBLE
