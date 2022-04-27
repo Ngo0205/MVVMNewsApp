@@ -1,5 +1,6 @@
 package com.androiddevs.mvvmnewsapp.ui.fragments
 
+import android.app.Application
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_saved_news.*
 class SavedNewsFragment: Fragment(R.layout.fragment_saved_news) {
 
     val viewModel: NewsViewModel by activityViewModels{
-        NewsViewModelProviderFactory(NewsRepository(ArticleDatabase(requireContext())) )
+        NewsViewModelProviderFactory(context?.applicationContext as Application,NewsRepository(ArticleDatabase(requireContext())) )
     }
     lateinit var newsAdapter : NewsAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

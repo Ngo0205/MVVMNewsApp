@@ -1,5 +1,6 @@
 package com.androiddevs.mvvmnewsapp.ui.fragments
 
+import android.app.Application
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebViewClient
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_article.*
 class ArticleFragment: Fragment(R.layout.fragment_article) {
 
     val viewModel: NewsViewModel by activityViewModels{
-        NewsViewModelProviderFactory(NewsRepository(ArticleDatabase(requireContext())) )
+        NewsViewModelProviderFactory(context?.applicationContext as Application,NewsRepository(ArticleDatabase(requireContext())) )
     }
     private val args : ArticleFragmentArgs by navArgs()
 

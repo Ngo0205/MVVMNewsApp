@@ -1,9 +1,11 @@
 package com.androiddevs.mvvmnewsapp.ui.fragments
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -25,9 +27,8 @@ import kotlinx.android.synthetic.main.fragment_breaking_news.paginationProgressB
 import kotlinx.android.synthetic.main.fragment_search_news.*
 
 class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
-
     val viewModel: NewsViewModel by activityViewModels {
-        NewsViewModelProviderFactory(NewsRepository(ArticleDatabase(requireContext())))
+        NewsViewModelProviderFactory(context?.applicationContext as Application,NewsRepository(ArticleDatabase(requireContext())))
     }
     lateinit var newsAdapter: NewsAdapter
     val TAG = "BreakingNewsTag"
@@ -60,7 +61,7 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
                 is Resource.Error -> {
                     hideProgessBar()
                     response.message?.let { message ->
-                        Log.e(TAG, "an error: $message")
+                        Toast.makeText(activity,"An error occured : $message",Toast.LENGTH_LONG).show()
                     }
                 }
                 is Resource.Loading -> {

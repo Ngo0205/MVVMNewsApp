@@ -1,5 +1,6 @@
 package com.androiddevs.mvvmnewsapp.ui.fragments
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -32,7 +33,7 @@ import kotlinx.coroutines.launch
 class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
 
     val viewModel: NewsViewModel by activityViewModels{
-        NewsViewModelProviderFactory(NewsRepository(ArticleDatabase(requireContext())) )
+        NewsViewModelProviderFactory(context?.applicationContext as Application,NewsRepository(ArticleDatabase(requireContext())) )
     }
     lateinit var newsAdapter: NewsAdapter
     val TAG ="SearchNewsTag"
